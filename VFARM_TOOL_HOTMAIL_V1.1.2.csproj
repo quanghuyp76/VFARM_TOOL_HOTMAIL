@@ -1,0 +1,124 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Browsers\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+
+
+	<ItemGroup> 
+    <Folder Include="Browsers\Data\profile\AmountExtractionHeuristicRegexes\" />
+    <Folder Include="Browsers\Data\profile\AutofillStates\" />
+    <Folder Include="Browsers\Data\profile\CertificateRevocation\" />
+    <Folder Include="Browsers\Data\profile\CookieReadinessList\" />
+    <Folder Include="Browsers\Data\profile\Crashpad\attachments\" />
+    <Folder Include="Browsers\Data\profile\Crashpad\reports\" />
+    <Folder Include="Browsers\Data\profile\Crowd Deny\" />
+    <Folder Include="Browsers\Data\profile\Default\blob_storage\5a655860-51ab-436b-9e51-384c8b1724e7\" />
+    <Folder Include="Browsers\Data\profile\Default\Download Service\Files\" />
+    <Folder Include="Browsers\Data\profile\Default\Extensions\Temp\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\aghbiahbpaijignceidepookljebhfak\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\aghbiahbpaijignceidepookljebhfak\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\agimnkijcaahngcdmfeangaknmldooml\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\agimnkijcaahngcdmfeangaknmldooml\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\fhihpiojkbmbpdjeoajapmgkhlnakfjf\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\fhihpiojkbmbpdjeoajapmgkhlnakfjf\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\fmgjjmmmlfnkbppncabfkddbjimcfncm\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\fmgjjmmmlfnkbppncabfkddbjimcfncm\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\kefjledonklijopmnomlcbpllchaibag\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\kefjledonklijopmnomlcbpllchaibag\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\mdpkiolbdkhdjpekfbkbmhigcaggjagi\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\mdpkiolbdkhdjpekfbkbmhigcaggjagi\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\mpnpojknpmmopombnjdcgaaiekajbnjb\Icons Maskable\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Manifest Resources\mpnpojknpmmopombnjdcgaaiekajbnjb\Icons Monochrome\" />
+    <Folder Include="Browsers\Data\profile\Default\Web Applications\Temp\" />
+    <Folder Include="Browsers\Data\profile\FileTypePolicies\" />
+    <Folder Include="Browsers\Data\profile\FirstPartySetsPreloaded\" />
+    <Folder Include="Browsers\Data\profile\hyphen-data\" />
+    <Folder Include="Browsers\Data\profile\MEIPreload\" />
+    <Folder Include="Browsers\Data\profile\OnDeviceHeadSuggestModel\" />
+    <Folder Include="Browsers\Data\profile\OpenCookieDatabase\" />
+    <Folder Include="Browsers\Data\profile\OptimizationHints\" />
+    <Folder Include="Browsers\Data\profile\OriginTrials\" />
+    <Folder Include="Browsers\Data\profile\PKIMetadata\" />
+    <Folder Include="Browsers\Data\profile\PrivacySandboxAttestationsPreloaded\" />
+    <Folder Include="Browsers\Data\profile\RecoveryImproved\" />
+    <Folder Include="Browsers\Data\profile\Safe Browsing\" />
+    <Folder Include="Browsers\Data\profile\SafetyTips\" />
+    <Folder Include="Browsers\Data\profile\SSLErrorAssistant\" />
+    <Folder Include="Browsers\Data\profile\Subresource Filter\Unindexed Rules\" />
+    <Folder Include="Browsers\Data\profile\ThirdPartyModuleList32\" />
+    <Folder Include="Browsers\Data\profile\TpcdMetadata\" />
+    <Folder Include="Browsers\Data\profile\TrustTokenKeyCommitments\" />
+    <Folder Include="Browsers\Data\profile\WidevineCdm\" />
+    <Folder Include="Browsers\Data\profile\ZxcvbnData\" />
+    <Folder Include="profile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+    <PackageReference Include="Selenium.Support" Version="4.29.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.29.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="134.0.6998.8800" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Script\Script_Login_2FA.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Setting\BrowserConfig.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Setting\Data_Manage.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Setting\SettingOption.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="input\Email.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="input\IDGPM.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="input\phone.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="input\Proxy.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="output\AccountBlock.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="output\Data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="output\Phoneused.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="output\Nophone.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="profile\Log.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="save\OptionSetting.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

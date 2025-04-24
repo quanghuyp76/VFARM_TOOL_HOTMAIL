@@ -1,0 +1,17 @@
+{
+  "check_HideChrome": false,
+  "check_Anonymous": false,
+  "check_DisableGpu": false,
+  "check_Input_File_Location": false,
+  "check_Input_Website": false,
+  "check_Proxy_IP_PORT": false,
+  "check_Proxy_Never": false,
+  "check_Browser": "GPM",
+  "check_Code": "Selenium",
+  "check_Script": "UnlockHotmail",
+  "check_ChromeSize": "",
+  "check_ChormeArrange": "",
+  "check_NumberProcess": 31,
+  "check_NumberThread": 2,
+  "check_UrlGetOtp": "http://otp.vocfor.site/get_otp?Brand=Microsoft&Token=c93b8228439b450112061c2857d857&Isdn="
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VFARM_TOOL_HOTMAIL_V0": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
