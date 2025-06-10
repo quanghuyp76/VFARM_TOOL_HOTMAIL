@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Text;
-using X_Vfarme.GPM;
+using OpenQA.Selenium.Support.UI;
+using OtpNet;
 using SeleniumExtras.WaitHelpers;
+using System.Text;
 using System.Text.RegularExpressions;
+using X_Vfarme.GPM;
 
 namespace X_Vframe_Tool
 {
@@ -241,7 +242,17 @@ namespace X_Vframe_Tool
             return null;
         }
 
+        public static string GenerateOTP(string secretKey)
+        {
+            // Chuyển khóa từ base32 sang byte[]
+            byte[] secretBytes = Base32Encoding.ToBytes(secretKey);
 
+            // Tạo đối tượng TOTP (mã theo thời gian)
+            Totp totp = new Totp(secretBytes);
+
+            // Sinh mã OTP hiện tại
+            return totp.ComputeTotp(); // Ví dụ: "123456"
+        }
 
 
     }
@@ -334,7 +345,7 @@ namespace X_Vframe_Tool
             {
                 profile_name = profileName,
                 //browser_version = "124.0.6367.29",
-                raw_proxy = selectedProxy,
+                //raw_proxy = selectedProxy,
                 is_noise_canvas = true,
                 is_noise_webgl = true,
                 is_noise_client_rect = true,

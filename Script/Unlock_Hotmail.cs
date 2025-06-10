@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OtpNet;
 using OpenQA.Selenium;
 using System.Collections.Concurrent;
 using File = System.IO.File;
@@ -201,7 +202,7 @@ namespace X_Vframe_Tool
                     driver.Navigate().GoToUrl("https://ifconfig.me/ip");
                     SeleniumHelper.WaitForPageLoad(driver, 10);
                     string xpath_checkip = "//pre[text()]";
-                    IWebElement element_checkip = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_checkip), 10);
+                    IWebElement element_checkip = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_checkip), 10000);
                     if (element_checkip != null)
                     {
                         row.Cells["Status"].Value = "checkip suscces";
@@ -230,7 +231,7 @@ namespace X_Vframe_Tool
                     int k_accountlock0 = 30;
                     while (k_accountlock0 > 0)
                     {
-                        IWebElement element_lock0 = SeleniumHelper.WaitForElement(driver, By.XPath("//div[text()='More information required']"), 1);
+                        IWebElement element_lock0 = SeleniumHelper.WaitForElement(driver, By.XPath("//div[text()='More information required']"), 1000);
                         if (element_lock0 != null)
                         {
                             row.Cells["Status"].Value = "Add Phone";
@@ -240,7 +241,7 @@ namespace X_Vframe_Tool
                         {
                             k_accountlock0 = k_accountlock0 - 1;
                             // input email
-                            IWebElement element_inputemail = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputemail), 1);
+                            IWebElement element_inputemail = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputemail), 300);
                             if (element_inputemail != null)
                             {
                                 row.Cells["Status"].Value = $"input email k:{k_accountlock0}";
@@ -251,7 +252,7 @@ namespace X_Vframe_Tool
                                 await Task.Delay(1000);
                             }
                             // input pass
-                            IWebElement element_inputpass = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputpass), 1);
+                            IWebElement element_inputpass = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputpass), 300);
                             if (element_inputpass != null)
                             {
                                 row.Cells["Status"].Value = $"input passw {k_accountlock0}";
@@ -262,11 +263,11 @@ namespace X_Vframe_Tool
                                 await Task.Delay(1000);
                             }
                             //stay is login
-                            IWebElement element_staylogin = SeleniumHelper.WaitForElement(driver, By.XPath("//h1[text()='Stay signed in?']"), 1);
+                            IWebElement element_staylogin = SeleniumHelper.WaitForElement(driver, By.XPath("//h1[text()='Stay signed in?']"), 300);
                             if (element_staylogin != null)
                             {
                                 row.Cells["Status"].Value = $"stay login";
-                                IWebElement element_click = SeleniumHelper.WaitForElement(driver, By.XPath("//button[@type=\"submit\" and text()='No']"), 10);
+                                IWebElement element_click = SeleniumHelper.WaitForElement(driver, By.XPath("//button[@type=\"submit\" and text()='No']"), 10000);
                                 if (element_click != null)
                                 {
                                     element_click.Click();
@@ -275,11 +276,11 @@ namespace X_Vframe_Tool
                                 }
                             }
                             // acept lời mời
-                            IWebElement element_aceptinvite = SeleniumHelper.WaitForElement(driver, By.XPath("//div[text()='Permissions requested by:']"), 1);
+                            IWebElement element_aceptinvite = SeleniumHelper.WaitForElement(driver, By.XPath("//div[text()='Permissions requested by:']"), 300);
                             if (element_aceptinvite != null)
                             {
                                 row.Cells["Status"].Value = $"Accept Invite";
-                                IWebElement element_click1 = SeleniumHelper.WaitForElement(driver, By.XPath("//input[@value=\"Accept\"]"), 1);
+                                IWebElement element_click1 = SeleniumHelper.WaitForElement(driver, By.XPath("//input[@value=\"Accept\"]"), 10000);
                                 element_click1.Click();
                                 SeleniumHelper.WaitForPageLoad(driver, 10);
                                 await Task.Delay(1000);
@@ -287,7 +288,7 @@ namespace X_Vframe_Tool
                             }
                             // add email recovery
                             string? otpold = string.Empty;
-                            IWebElement element_addemailrecovery = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_addemailrecovery), 1);
+                            IWebElement element_addemailrecovery = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_addemailrecovery), 300);
                             if (element_addemailrecovery != null)
                             {
                                 row.Cells["Status"].Value = $"ADD email recovery k:{k_accountlock0}";
@@ -296,55 +297,7 @@ namespace X_Vframe_Tool
                                     File.AppendAllText("output\\Data.txt", $"{email}|{password}|addmkp" + Environment.NewLine);
                                 }
                                 goto EndLoop;
-                                //string? xpath_inputemailrecovery = "//input[@aria-label='Alternate email address']";
-                                //IWebElement element_inputemailrecovery = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputemailrecovery), 1);
-                                //if (element_inputemailrecovery != null)
-                                //{
-                                //    row.Cells["Status"].Value = "check email old";
-                                //    otpold = await OtpHelper.GETOTPSMV(email_recovery, 10);
-                                //    element_inputemailrecovery.SendKeys(email_recovery);
-                                //    await Task.Delay(300);
-                                //    driver.FindElement(By.XPath("//input[@type='submit']")).Click();
-                                //    await Task.Delay(300);
-                                //    SeleniumHelper.WaitForPageLoad(driver, 10);
-                                //    string? xpath_inputotp = "//input[@placeholder='Code']";
-                                //    IWebElement element_inputotp = SeleniumHelper.WaitForElement(driver, By.XPath(xpath_inputotp), 10);
-                                //    string? otp = string.Empty;
-                                //    if (element_inputotp != null)
-                                //    {
-                                //        int k_getpotp = 30;
-                                //        while (k_getpotp > 0)
-                                //        {
-                                //            row.Cells["Status"].Value = $"Get OTP Mail {k_getpotp}";
-                                //            otp = await OtpHelper.GETOTPSMV(email_recovery, 1);
-                                //            if (otp != null && otp != otpold)
-                                //            {
-                                //                row.Cells["Status"].Value = $"otp: {otp}";
-                                //                element_inputotp.SendKeys(otp);
-                                //                await Task.Delay(random.Next(300, 800));
-                                //                driver.FindElement(By.XPath("//input[@type='submit']")).Click();
-                                //                SeleniumHelper.WaitForPageLoad(driver, 10);
-                                //                await Task.Delay(random.Next(1000, 1500));
-
-                                //                break;
-                                //            }
-                                //            else
-                                //            {
-                                //                row.Cells["Status"].Value = "không tìm thấy otp";
-                                //                k_getpotp = k_getpotp - 1;
-                                //                if (k_getpotp == 0)
-                                //                {
-                                //                    row.Cells["Status"].Value = "Get OTP Mail Fail";
-                                //                    goto EndLoop;
-                                //                }
-                                //                else
-                                //                {
-                                //                    await Task.Delay(1000);
-                                //                }
-                                //            }
-                                //        }
-                                //    }
-                                //}
+                                
                             }
                             // too many request
                             IWebElement element_toomanyrequest = SeleniumHelper.WaitForElement(driver, By.XPath("//[text()='Too Many Requests']"), 1);
@@ -493,13 +446,14 @@ namespace X_Vframe_Tool
                         element11.Click();
                         await Task.Delay(1000);
                         SeleniumHelper.WaitForPageLoad(driver, 15);
+                        row.Cells["Status"].Value = "cho captcha";
                     }
                     else
                     {
                         row.Cells["Status"].Value = "start add phone fail";
                         goto EndLoop;
                     }
-                    IWebElement element_getcode = SeleniumHelper.WaitForElement(driver, By.XPath("//input[@aria-label=\"Enter code\"]"), 15000);
+                    IWebElement element_getcode = SeleniumHelper.WaitForElement(driver, By.XPath("//input[@aria-label=\"Enter code\"]"), 45000);
                     string otp = string.Empty;
                     if (element_getcode != null)
                     {
@@ -520,17 +474,23 @@ namespace X_Vframe_Tool
                         row.Cells["Status"].Value = $"input OTP {otp1}";
                         IWebElement element_getcode1 = SeleniumHelper.WaitForElement(driver, By.XPath("//input[@aria-label=\"Enter code\"]"), 15000);
                         element_getcode1.SendKeys(otp1);
-                        await Task.Delay(1000);
+                        await Task.Delay(3000);
                         driver.FindElement(By.XPath("//button[@class=\"ms-Button ms-Button--primary root-255\"]")).Click();
                         SeleniumHelper.WaitForPageLoad(driver, 15);
                         await Task.Delay(10000);
-                        IWebElement element_addphoness = SeleniumHelper.WaitForElement(driver, By.XPath("//span[@aria-label=\"Verification complete. Your phone has been registered.\"]"), 15);
+                        row.Cells["Status"].Value = "get otp ss";
+                        IWebElement element_addphoness = SeleniumHelper.WaitForElement(driver, By.XPath("//span[@aria-label=\"Verification complete. Your phone has been registered.\"]"), 25000);
                         if (element_addphoness != null)
                         {
                             row.Cells["Status"].Value = "very phone succes";
-                            driver.FindElement(By.XPath("//button[@class=\"ms-Button ms-Button--primary root-356\"]")).Click();
-                            await Task.Delay(1000);
-                            SeleniumHelper.WaitForPageLoad(driver, 15);
+                            IWebElement element_addphoness111 = SeleniumHelper.WaitForElement(driver, By.XPath("//span[text()=\"Next\"]"), 20000);
+                            if(element_addphoness111 != null)
+                            {
+                                await Task.Delay(1000);
+                                element_addphoness111.Click();
+                                await Task.Delay(1000);
+                            }
+                            SeleniumHelper.WaitForPageLoad(driver, 20);
                             await Task.Delay(1000);
                         }
                         IWebElement element_addphoness1 = SeleniumHelper.WaitForElement(driver, By.XPath("//b[text()=\"Default sign-in method:\"]"), 15000);
@@ -593,11 +553,12 @@ namespace X_Vframe_Tool
                             await Task.Delay(3000);
                         }
                         IWebElement element5 = SeleniumHelper.WaitForElement(driver, By.CssSelector("span.ms-pii[aria-labelledby='secretKeyLabel']"), 10000);
+                        string secretKey = string.Empty;
                         if (element5 != null)
                         {
                             row.Cells["Status"].Value = "get 2FA";
-                            string secretKey = element5.Text;
-                            row.Cells["SecretKey"].Value = $"2FA: {secretKey}";
+                            secretKey = element5.Text;
+                            row.Cells["Status"].Value = $"2FA: {secretKey}";
                             lock (lockFile)
                             {
                                 File.AppendAllText("output\\Data.txt", $"{email}|{password}|{phone}|{secretKey}" + Environment.NewLine);
@@ -616,8 +577,7 @@ namespace X_Vframe_Tool
                         if (element6 != null) 
                         {
                             row.Cells["Status"].Value = "get 2fa code";
-                            string? otp2fa = string.Empty;
-                            otp2fa = "111111";
+                            string? otp2fa = OtpHelper.GenerateOTP(secretKey);
                             //string otp2fa = await OtpHelper.GetOtp($"2fa_{email}", 30);
                             if (otp2fa != null)
                             {
@@ -626,6 +586,7 @@ namespace X_Vframe_Tool
                                 driver.FindElement(By.XPath("//span[text()='Next']")).Click();
                                 SeleniumHelper.WaitForPageLoad(driver, 10);
                                 await Task.Delay(15000);
+                                row.Cells["Status"].Value = "bat 2fa ss";
                             }
                             else
                             {
