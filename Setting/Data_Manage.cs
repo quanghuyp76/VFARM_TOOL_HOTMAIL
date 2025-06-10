@@ -255,7 +255,7 @@ namespace X_Vframe_Tool
                 // Tạo FluentWait với driver
                 DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver)
                 {
-                    Timeout = TimeSpan.FromMilliseconds(300),                      // Thời gian chờ tối đa
+                    Timeout = TimeSpan.FromMilliseconds(timeoutInSeconds),                      // Thời gian chờ tối đa
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMillis)   // Kiểm tra lại sau mỗi khoảng thời gian
                 };
 
